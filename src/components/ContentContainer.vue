@@ -52,8 +52,8 @@
       </div>
     </q-banner>
     <q-list bordered class="q-mx-auto q-mt-sm bg-primary" id="nft-exp">
-      <q-expansion-item label="Your PAPILIO" header-class="text-white text-center text-weight-bold" id="exp" :key="refreshController">
-        <n-f-t-container v-if="nfts.length > 0" :nfts="nfts" :key="nfts" :staked="stakedCount" @reload="reloadContainer" @staked="getBalances"></n-f-t-container>
+      <q-expansion-item label="Your PAPILIO" header-class="text-white text-center text-weight-bold q-ml-xl" id="exp" :key="refreshController" expand-icon-class="text-white">
+        <n-f-t-container v-if="nfts.length > 0" :nfts="nfts" :key="nfts" :staked="stakedCount" @reload="reloadContainer"></n-f-t-container>
         <p v-else class="text-white text-center q-pt-md">You have no Papilio Palatia NFTs!</p>
       </q-expansion-item>
     </q-list>
@@ -111,8 +111,11 @@ export default {
   },
 
   methods: {
-    reloadContainer() {
-      this.refreshController = !this.refreshController;
+    reloadContainer: async function () {
+      await this.getBalances().then(() => {
+        this.refreshController = !this.refreshController;
+      })
+
     },
     getBalances: async function () {
       const {active ,account} = this.web3Modal;

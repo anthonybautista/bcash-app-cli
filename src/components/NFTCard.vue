@@ -49,6 +49,22 @@ export default {
       } catch (e) {
         this.errorMessage = e["reason"];
       }
+    },
+    unStake: async function() {
+      try {
+        const contract = getVecashContract();
+        const tx = await contract["unStakeNFTs"]([this.nft.tokenId]);
+        this.errorMessage = 'unStaking...';
+        const receipt = await tx.wait();
+        if (receipt.status) {
+          this.errorMessage = 'Successfully unStaked!';
+          this.$emit('staked');
+        } else {
+          this.errorMessage = 'unStaking Failed!';
+        }
+      } catch (e) {
+        this.errorMessage = e["reason"];
+      }
     }
   },
 
