@@ -147,7 +147,7 @@ export default {
           axios.request(options).then(function (response) {
             uri = response.data["image"];
             if (uri.substring(0,4) === "ipfs") {
-              uri = "https://gateway.pinata.cloud/ipfs/"+uri.substring(7);
+              uri = "https://ipfs.butterflycash.io/"+uri.substring(7);
             }
           })
               .then( () => {
