@@ -9,7 +9,6 @@ export default {
             primary: '#5087C6',
             secondary: '#DDDBCB',
             accent: '#e5fcff',
-            purp: '#631d76',
             dark: '#1d1d1d',
             'dark-page': '#121212',
 

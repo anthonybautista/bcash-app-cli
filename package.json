@@ -20,6 +20,7 @@
     "quasar": "^2.0.0",
     "stream-browserify": "^3.0.0",
     "vue": "^3.2.13",
+    "vue-router": "^4.0.13",
     "vue-toastification": "^2.0.0-rc.5",
     "vue3-styled-components": "^1.2.1",
     "vuex": "^4.1.0",

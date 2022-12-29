@@ -1,9 +1,10 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import { Quasar } from 'quasar'
-import quasarUserOptions from './quasar-user-options'
-import Vuex from 'vuex'
+import { createApp } from 'vue';
+import App from './App.vue';
+import { Quasar } from 'quasar';
+import quasarUserOptions from './quasar-user-options';
+import Vuex from 'vuex';
 import web3ModalStore from "@/store/modules/web3Modal";
+import router from './router';
 
 const store = new Vuex.Store({
     state: {},
@@ -15,6 +16,6 @@ const store = new Vuex.Store({
     }
 })
 
-createApp(App).use(Quasar, quasarUserOptions).use(store).mount('#app')
+createApp(App).use(Quasar, quasarUserOptions).use(store).use(router).mount('#app')
 
 export default store;

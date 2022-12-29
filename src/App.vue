@@ -10,21 +10,47 @@
           Connect Wallet
         </q-btn>
       </q-toolbar>
-<!--    <div>
-      <q-btn-toggle
-          v-model="selected"
-          spread
-          no-caps
-          toggle-color="accent"
-          color="secondary"
-          text-color="primary"
-          :options="categories"
-      ></q-btn-toggle>
-    </div>-->
     </q-header>
     <div class="buffer q-mt-lg"></div>
+    <div class="q-pa-md q-mx-auto text-center" id="navButton">
+      <q-btn-dropdown color="secondary" label="Menu" class="q-mt-lg text-black text-bold">
+        <q-list class="bg-secondary">
+          <q-item clickable v-close-popup>
+            <q-item-section>
+              <q-item-label>
+                <router-link to="/">veStaking</router-link>
+              </q-item-label>
+            </q-item-section>
+          </q-item>
 
-    <content-container :key="refreshController" @reload="reloadContainer"></content-container>
+          <q-item clickable v-close-popup @click="onItemClick">
+            <q-item-section>
+              <q-item-label>
+                <router-link to="/farm">LP Farm</router-link>
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick">
+            <q-item-section>
+              <q-item-label>
+                <router-link to="/auto">Auto LP</router-link>
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick">
+            <q-item-section>
+              <q-item-label>
+                <router-link to="/stake">sbCash</router-link>
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-btn-dropdown>
+    </div>
+
+    <router-view/>
 
     <div class="buffer-lg"></div>
 
@@ -51,7 +77,6 @@ import { fabTwitter, fabDiscord } from '@quasar/extras/fontawesome-v6'
 import Web3ModalVue from "web3modal-vue";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import {web3Modal} from "./config/mixins";
-import ContentContainer from "@/components/ContentContainer";
 import {getFireContract} from "@/utils/contract";
 /*import { ethers } from "ethers";
 import axios from "axios";*/
@@ -67,7 +92,6 @@ export default {
   },
 
   components: {
-    ContentContainer,
     Web3ModalVue,
   },
 
@@ -169,6 +193,10 @@ body {
 
 .buffer-lg {
   height: 100px;
+}
+
+#navButton {
+  width: 95%;
 }
 
 </style>

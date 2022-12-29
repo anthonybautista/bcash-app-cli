@@ -1,6 +1,7 @@
 <template>
-  <div id="cc" class="q-pt-md q-pb-md q-mt-xl q-mb-none flex justify-center bg-secondary rounded-borders q-mx-auto shadow-5">
+  <div id="cc" class="q-pt-md q-pb-md q-mb-none flex justify-center bg-secondary rounded-borders q-mx-auto shadow-5">
     <q-banner rounded class="bg-accent text-white q-px-none q-mx-auto" id="banner">
+      <h5 class="text-black q-pa-none q-mt-none q-mb-xs text-center">VeStaking</h5>
       <div id="gameBanner" class="text-center q-mx-auto">
         <div id="bCashDiv" class="bg-primary q-pa-sm q-mx-xs rounded-borders shadow-5">
           <p class="q-mb-xs">bCASH Staked</p>
@@ -34,13 +35,14 @@
                  type="number"
                  filled
                  id="bCashAmount"
-                 label="Enter Amount"
+                 label="Enter Amount bCASH"
                  lazy-rules
                  v-model="bCashAmount"
-                 :rules="[ val => val > 0 || 'Invalid Game ID']"
+                 :rules="[ val => val > 0 || 'Invalid Amount']"
         ></q-input>
         <p class="text-black q-mb-none">You have: {{myBcash}} bCASH</p>
-        <q-btn label="Approve" color="primary" @click="approveBcash" class="q-ma-sm"> </q-btn>
+        <p class="text-black q-mb-none">You approved: {{myApproval}} bCASH</p>
+        <q-btn v-if="this.myApproval <= this.myBcash" label="Approve" color="primary" @click="approveBcash" class="q-ma-sm"> </q-btn>
         <q-btn label="Stake" color="primary" @click="stakeBcash" class="q-ma-sm"> </q-btn>
         <q-btn label="unStake" color="primary" @click="unStakeBcash" class="q-ma-sm"> </q-btn>
       </div>
@@ -80,6 +82,7 @@ export default {
       lpBcash: 0,
       myVeCash: 0,
       myBcash: 0,
+      myApproval: 0,
       tier: 0,
       bCashAmount: 0,
       veCashClaimable: 0,
@@ -126,7 +129,6 @@ export default {
         this.nfts = [];
         let allTokens = await nftContract.tokensOfOwner(account);
         let [bCashStaked, lpBcash, tier, stakedTokens] = await contract.totalViewFor(account);
-        console.log(stakedTokens)
         this.veCashClaimable = Number((await contract.claimable(account)) / 10**18).toFixedNoRound(6);
         this.myVeCash = Number((await contract.balanceOf(account)) / 10**18).toFixedNoRound(2);
         this.stakedCount = stakedTokens.length;
@@ -148,7 +150,6 @@ export default {
             uri = response.data["image"];
             if (uri.substring(0,4) === "ipfs") {
               uri = "https://ipfs.butterflycash.io/"+uri.substring(67);
-              console.log(uri)
             }
           })
               .then( () => {
@@ -168,6 +169,9 @@ export default {
         await bCashContract.balanceOf(account).then(x => {
           this.myBcash = (Number(x) / 10**18).toFixedNoRound(6);
         })
+        await bCashContract.allowance(account, "0x04Ee75e533622E8C24D463588d83a310c21fEE3F").then(x => {
+          this.myApproval = (Number(x) / 10**18).toFixedNoRound(6);
+        })
       }
     },
     approveBcash: async function() {
@@ -180,6 +184,9 @@ export default {
           const receipt = await tx.wait()
           if (receipt.status) {
             this.errorMessage = 'Successfully Approved!'
+            await contract.allowance(this.account, "0x04Ee75e533622E8C24D463588d83a310c21fEE3F").then(x => {
+              this.myApproval = (Number(x) / 10**18).toFixedNoRound(6);
+            })
           } else {
             this.errorMessage = 'Approval Failed!'
           }
@@ -198,6 +205,7 @@ export default {
           const receipt = await tx.wait()
           if (receipt.status) {
             this.errorMessage = 'Successfully Staked!'
+            await this.getBalances();
             this.$emit('reload');
           } else {
             this.errorMessage = 'Staking Failed!'
@@ -217,6 +225,7 @@ export default {
           const receipt = await tx.wait()
           if (receipt.status) {
             this.errorMessage = 'Successfully unStaked!'
+            await this.getBalances();
             this.$emit('reload');
           } else {
             this.errorMessage = 'unStaking Failed!'
@@ -236,7 +245,7 @@ export default {
           const receipt = await tx.wait()
           if (receipt.status) {
             this.errorMessage = 'Successfully claimed!'
-            this.$emit('reload');
+            await this.getBalances();
           } else {
             this.errorMessage = 'Claiming Failed!'
           }
