@@ -18,7 +18,15 @@
           <q-item clickable v-close-popup>
             <q-item-section>
               <q-item-label>
-                <router-link to="/">veStaking</router-link>
+                <router-link to="/">Swap</router-link>
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-close-popup>
+            <q-item-section>
+              <q-item-label>
+                <router-link to="/ve">veStaking</router-link>
               </q-item-label>
             </q-item-section>
           </q-item>
@@ -61,6 +69,10 @@
       <q-page-sticky position="bottom-left" :offset="[18, 18]">
         <q-btn fab :icon="fabTwitter" color="secondary" text-color="primary" @click="gotoURL('https://twitter.com/bCASH_AVAX')"/>
       </q-page-sticky>
+      <div id="disclaimer" class="bg-secondary text-black text-center q-mx-auto text-caption rounded-borders">
+        <p class="q-mb-none">NOT LEGAL ADVICE - DISCLAIMER</p>
+        <p>Users bear their own responsibility to act in accordance with local laws regarding all aspects of digital asset ownership.</p>
+      </div>
     </q-footer>
     <web3-modal-vue
         ref="web3modal"
@@ -196,6 +208,10 @@ body {
 }
 
 #navButton {
+  width: 95%;
+}
+
+#disclaimer {
   width: 95%;
 }
 

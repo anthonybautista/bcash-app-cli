@@ -3,10 +3,16 @@ import VeContainer from "@/views/VeContainer.vue";
 import LpContainer from "@/components/LpContainer";
 import AutoLpContainer from "@/views/AutoLpContainer";
 import StakeContainer from "@/views/StakeContainer";
+import SwapContainer from "@/views/SwapContainer";
 
 const routes = [
     {
         path: "/",
+        name: "Swap",
+        component: SwapContainer,
+    },
+    {
+        path: "/ve",
         name: "Ve",
         component: VeContainer,
     },
