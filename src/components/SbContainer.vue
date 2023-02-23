@@ -101,7 +101,7 @@ export default {
           this.myBcash = (Number(x) / 10**18).toFixedNoRound(3);
         })
 
-        await bCashContract.allowance(this.account, "0xa090463090EE99b8AbbBF8E6d0480CB5FDDDD1C6").then(x => {
+        await bCashContract.allowance(this.account, "0xC77daa127Cd8A3C051a1B835003b6925c04B55cB").then(x => {
           this.myApproval = (Number(x) / 10**18).toFixedNoRound(3);
         })
 
@@ -129,12 +129,12 @@ export default {
       if (active) {
         try {
           const contract = getBcashContract();
-          const tx = await contract["approve"]("0xa090463090EE99b8AbbBF8E6d0480CB5FDDDD1C6",ethers.utils.parseEther((this.bCashAmount.toString())));
+          const tx = await contract["approve"]("0xC77daa127Cd8A3C051a1B835003b6925c04B55cB",ethers.utils.parseEther((this.bCashAmount.toString())));
           this.errorMessage = 'Approving...';
           const receipt = await tx.wait()
           if (receipt.status) {
             this.errorMessage = 'Successfully Approved!'
-            await contract.allowance(this.account, "0xa090463090EE99b8AbbBF8E6d0480CB5FDDDD1C6").then(x => {
+            await contract.allowance(this.account, "0xC77daa127Cd8A3C051a1B835003b6925c04B55cB").then(x => {
               this.myApproval = (Number(x) / 10**18).toFixedNoRound(3);
             })
           } else {

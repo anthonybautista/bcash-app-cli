@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header elevated class="bg-primary text-white">
+    <q-header elevated class="bg- text-white">
       <q-toolbar>
         <q-toolbar-title>
           <img src="@/assets/logo.png" class="logo"/>
@@ -15,45 +15,65 @@
     <div class="q-pa-md q-mx-auto text-center" id="navButton">
       <q-btn-dropdown color="secondary" label="Menu" class="q-mt-lg text-black text-bold">
         <q-list class="bg-secondary">
-          <q-item clickable v-close-popup>
-            <q-item-section>
-              <q-item-label>
-                <router-link to="/">Swap</router-link>
-              </q-item-label>
-            </q-item-section>
-          </q-item>
+          <router-link to="/">
+            <q-item clickable v-close-popup>
+              <q-item-section>
+                <q-item-label>
+                  Swap
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+          </router-link>
 
-          <q-item clickable v-close-popup>
-            <q-item-section>
-              <q-item-label>
-                <router-link to="/ve">veStaking</router-link>
-              </q-item-label>
-            </q-item-section>
-          </q-item>
+          <router-link to="/ve">
+            <q-item clickable v-close-popup>
+              <q-item-section>
+                <q-item-label>
+                  veStaking
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+          </router-link>
 
-          <q-item clickable v-close-popup @click="onItemClick">
-            <q-item-section>
-              <q-item-label>
-                <router-link to="/farm">LP Farm</router-link>
-              </q-item-label>
-            </q-item-section>
-          </q-item>
+          <router-link to="/farm">
+            <q-item clickable v-close-popup @click="onItemClick">
+              <q-item-section>
+                <q-item-label>
+                  LP Farm
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+          </router-link>
 
-          <q-item clickable v-close-popup @click="onItemClick">
-            <q-item-section>
-              <q-item-label>
-                <router-link to="/auto">Auto LP</router-link>
-              </q-item-label>
-            </q-item-section>
-          </q-item>
+          <router-link to="/auto">
+            <q-item clickable v-close-popup @click="onItemClick">
+              <q-item-section>
+                <q-item-label>
+                  Auto LP
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+          </router-link>
 
-          <q-item clickable v-close-popup @click="onItemClick">
-            <q-item-section>
-              <q-item-label>
-                <router-link to="/stake">sbCash</router-link>
-              </q-item-label>
-            </q-item-section>
-          </q-item>
+          <router-link to="/stake">
+            <q-item clickable v-close-popup @click="onItemClick">
+              <q-item-section>
+                <q-item-label>
+                  sbCash
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+          </router-link>
+
+          <router-link to="/dstr">
+            <q-item clickable v-close-popup @click="onItemClick">
+              <q-item-section>
+                <q-item-label>
+                  DSTR
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+          </router-link>
         </q-list>
       </q-btn-dropdown>
     </div>
@@ -70,7 +90,8 @@
         <q-btn fab :icon="fabTwitter" color="secondary" text-color="primary" @click="gotoURL('https://twitter.com/bCASH_AVAX')"/>
       </q-page-sticky>
       <div id="disclaimer" class="bg-secondary text-black text-center q-mx-auto text-caption rounded-borders">
-        <p class="q-mb-none">NOT LEGAL ADVICE - DISCLAIMER</p>
+        <p class="q-mb-none">NOT LEGAL ADVICE - NOT INVESTMENT ADVICE</p>
+        <p class="q-mb-none">NOT PARENTING ADVICE - DISCLAIMER</p>
         <p>Users bear their own responsibility to act in accordance with local laws regarding all aspects of digital asset ownership.</p>
       </div>
     </q-footer>
@@ -204,7 +225,7 @@ body {
 }
 
 .buffer-lg {
-  height: 100px;
+  height: 200px;
 }
 
 #navButton {

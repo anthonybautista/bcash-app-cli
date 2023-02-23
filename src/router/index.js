@@ -4,6 +4,7 @@ import LpContainer from "@/components/LpContainer";
 import AutoLpContainer from "@/views/AutoLpContainer";
 import StakeContainer from "@/views/StakeContainer";
 import SwapContainer from "@/views/SwapContainer";
+import DSTRContainer from "@/views/DSTRContainer";
 
 const routes = [
     {
@@ -30,6 +31,11 @@ const routes = [
         path: "/stake",
         name: "Stake",
         component: StakeContainer,
+    },
+    {
+        path: "/dstr",
+        name: "DSTR",
+        component: DSTRContainer,
     },
 ];
 
