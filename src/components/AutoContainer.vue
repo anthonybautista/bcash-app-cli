@@ -18,7 +18,7 @@
       </div>
       <div class="text-center q-mt-md">
         <p class="text-black">
-          This contract allows you to deposit 1-25 AVAX and receive an equivalent amount of $bCASH for free in exchange for
+          This contract allows you to deposit 1-100 AVAX and receive an equivalent amount of $bCASH for free in exchange for
           taking on the risk of providing liquidity for 4 weeks. After 4 weeks you will receive PGL liquidity tokens (minus a 10% fee that goes to the bCASH treasury). You can only
           have one lock per wallet at a time.
         </p>
